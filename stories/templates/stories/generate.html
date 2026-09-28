@@ -1,0 +1,66 @@
+{% extends 'stories/base.html' %}
+
+{% block title %}Generate Story{% endblock %}
+
+{% block content %}
+<div class="container page-padding">
+    <div class="card form-card glass-card">
+        <div class="section-heading">
+            <span class="eyebrow">Story Generator</span>
+            <h2>Build your story</h2>
+        </div>
+
+        <form method="post" class="story-form" id="story-form">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="alert error">{{ form.non_field_errors }}</div>
+            {% endif %}
+
+            <div class="form-grid">
+                <div class="field">
+                    <label for="id_genre">{{ form.genre.label }}</label>
+                    {{ form.genre }}
+                    {% if form.genre.errors %}<div class="field-error">{{ form.genre.errors }}</div>{% endif %}
+                </div>
+                <div class="field">
+                    <label for="id_main_character">{{ form.main_character.label }}</label>
+                    {{ form.main_character }}
+                    {% if form.main_character.errors %}<div class="field-error">{{ form.main_character.errors }}</div>{% endif %}
+                </div>
+                <div class="field">
+                    <label for="id_location">{{ form.location.label }}</label>
+                    {{ form.location }}
+                    {% if form.location.errors %}<div class="field-error">{{ form.location.errors }}</div>{% endif %}
+                </div>
+                <div class="field">
+                    <label for="id_theme">{{ form.theme.label }}</label>
+                    {{ form.theme }}
+                    {% if form.theme.errors %}<div class="field-error">{{ form.theme.errors }}</div>{% endif %}
+                </div>
+                <div class="field">
+                    <label for="id_mood">{{ form.mood.label }}</label>
+                    {{ form.mood }}
+                    {% if form.mood.errors %}<div class="field-error">{{ form.mood.errors }}</div>{% endif %}
+                </div>
+                <div class="field">
+                    <label for="id_story_length">{{ form.story_length.label }}</label>
+                    {{ form.story_length }}
+                    {% if form.story_length.errors %}<div class="field-error">{{ form.story_length.errors }}</div>{% endif %}
+                </div>
+            </div>
+
+            <div class="length-guide">
+                <p><strong>Short</strong> → approximately 250–400 words</p>
+                <p><strong>Medium</strong> → approximately 500–700 words</p>
+                <p><strong>Long</strong> → approximately 900–1200 words</p>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="primary-btn generate-btn">
+                    <span class="button-text">✨ Create Story</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

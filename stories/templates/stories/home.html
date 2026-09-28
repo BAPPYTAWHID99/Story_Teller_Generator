@@ -1,0 +1,30 @@
+{% extends 'stories/base.html' %}
+
+{% block title %}Home | Story Teller Generator{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container hero-grid">
+        <div class="hero-copy">
+            <span class="eyebrow">Creative storytelling made simple</span>
+            <h1>Create Your Own Story</h1>
+            <p>Turn a few simple ideas into a complete story. Choose your genre, character, world, theme, and mood. Let the Story Teller Generator bring your imagination to life.</p>
+            <div class="hero-actions">
+                <a href="{% url 'generate_story' %}" class="primary-btn">✨ Create a Story</a>
+                <a href="{% url 'story_history' %}" class="secondary-btn">View History</a>
+            </div>
+        </div>
+        <div class="hero-card glass-card">
+            <h3>Example prompt</h3>
+            <ul>
+                <li><strong>Genre:</strong> Fantasy</li>
+                <li><strong>Main Character:</strong> A young engineer</li>
+                <li><strong>Location:</strong> A mysterious city</li>
+                <li><strong>Theme:</strong> Friendship</li>
+                <li><strong>Mood:</strong> Adventure</li>
+                <li><strong>Length:</strong> Medium</li>
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'stories/base.html' %}
+
+{% block title %}Story History{% endblock %}
+
+{% block content %}
+<div class="container page-padding">
+    <div class="section-heading centered">
+        <span class="eyebrow">Archive</span>
+        <h2>Story History</h2>
+    </div>
+
+    <div class="history-grid">
+        {% for story in stories %}
+        <article class="history-card glass-card">
+            <div class="card-top">
+                <span class="tag">{{ story.genre }}</span>
+                <span class="tag subtle">{{ story.mood }}</span>
+            </div>
+            <h3>{{ story.title }}</h3>
+            <p><strong>Theme:</strong> {{ story.theme }}</p>
+            <p><strong>Created:</strong> {{ story.created_at|date:'M d, Y' }}</p>
+            <div class="history-actions">
+                <a href="{% url 'story_detail' story.pk %}" class="secondary-btn">Read</a>
+                <form method="post" action="{% url 'story_delete' story.pk %}" class="inline-form">
+                    {% csrf_token %}
+                    <button type="submit" class="danger-btn">Delete</button>
+                </form>
+            </div>
+        </article>
+        {% empty %}
+        <div class="empty-state glass-card">
+            <p>No stories yet. Create your first one to begin the collection.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

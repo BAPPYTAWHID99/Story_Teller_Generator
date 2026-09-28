@@ -1,0 +1,31 @@
+{% extends 'stories/base.html' %}
+
+{% block title %}About | Story Teller Generator{% endblock %}
+
+{% block content %}
+<div class="container page-padding narrow">
+    <div class="glass-card about-card">
+        <span class="eyebrow">About</span>
+        <h2>Story Teller Generator</h2>
+        <p>A Django-based procedural story-generation application that transforms user-defined creative parameters into a complete narrative.</p>
+        <p>The project is designed to help users create imaginative stories by combining genre, character, location, theme, mood, and length into a cohesive written experience. It focuses on a clean architecture where forms validate user choices, a generation engine composes the narrative, and a public API provides optional inspirational enrichment without depending on it for the core story.</p>
+        <h3>Features</h3>
+        <ul>
+            <li>Responsive single-page storytelling experience</li>
+            <li>Structured story generation with genre-driven worldbuilding</li>
+            <li>Database persistence for all generated stories</li>
+            <li>Story history, viewing, deletion, and regeneration</li>
+            <li>API-powered inspirational quote fallback</li>
+            <li>Modern interface and accessible forms</li>
+        </ul>
+        <h3>Technology Stack</h3>
+        <p>Python, Django, SQLite, HTML5, CSS3, JavaScript, Bootstrap-inspired custom UI, and the Python requests library.</p>
+        <h3>Story-generation methodology</h3>
+        <p>Each story is assembled through a template generator that blends plot structure, narrative beats, character identity, setting, and mood. The design keeps business logic separate from view handling and allows a future AI-backed generator to slot into the same interface.</p>
+        <h3>Database and API integration</h3>
+        <p>Generated stories are saved into SQLite, and a public quote API is queried only as an optional inspiration layer. If the API is unavailable, the application continues without exposing technical errors to the user.</p>
+        <h3>Future improvements</h3>
+        <p>Future enhancements could include multilingual story generation, user accounts, downloadable stories, and a plugin architecture for AI-backed story generation.</p>
+    </div>
+</div>
+{% endblock %}

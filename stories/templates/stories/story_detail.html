@@ -1,0 +1,74 @@
+{% extends 'stories/base.html' %}
+
+{% block title %}{{ story.title }}{% endblock %}
+
+{% block content %}
+<div class="container page-padding">
+    <article class="story-reader glass-card">
+        <div class="story-header-row">
+            <div>
+                <span class="eyebrow">Story</span>
+                <h1>{{ story.title }}</h1>
+            </div>
+            <div class="story-actions">
+                <a href="{% url 'generate_story' %}" class="secondary-btn">✨ Generate Another</a>
+                <button type="button" class="secondary-btn" id="copy-story-btn">📋 Copy Story</button>
+                <button type="button" class="secondary-btn" onclick="window.print()">🖨️ Print</button>
+                <a href="{% url 'story_detail' story.pk %}" class="secondary-btn">🔄 Regenerate</a>
+            </div>
+        </div>
+
+        <div class="story-meta">
+            <span><strong>Genre:</strong> {{ story.genre }}</span>
+            <span><strong>Mood:</strong> {{ story.mood }}</span>
+            <span><strong>Theme:</strong> {{ story.theme }}</span>
+        </div>
+
+        <div class="story-divider"></div>
+
+        <div class="story-content" id="story-content">{{ story.content|linebreaksbr }}</div>
+
+        {% if show_quote %}
+        <div class="quote-box">
+            <h3>✨ Inspiration</h3>
+            <p class="quote-text">“{{ quote.quote }}”</p>
+            <p class="quote-author">— {{ quote.author }}</p>
+            <small>Quote provided by public quote API</small>
+        </div>
+        {% else %}
+        <div class="quote-box quote-empty">
+            <h3>✨ Inspiration</h3>
+            <p>No inspirational quote is available right now.</p>
+        </div>
+        {% endif %}
+
+        <div class="story-footer-actions">
+            <a href="{% url 'story_history' %}" class="secondary-btn">← Back</a>
+            <form method="post" action="{% url 'story_delete' story.pk %}" class="inline-form">
+                {% csrf_token %}
+                <button type="submit" class="danger-btn">Delete</button>
+            </form>
+        </div>
+    </article>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      const btn = document.getElementById('copy-story-btn');
+      if (btn) {
+          btn.addEventListener('click', async function () {
+              const storyText = document.getElementById('story-content')?.innerText || '';
+              try {
+                  await navigator.clipboard.writeText(storyText);
+                  btn.textContent = '✅ Copied';
+                  setTimeout(() => btn.textContent = '📋 Copy Story', 1500);
+              } catch (error) {
+                  btn.textContent = 'Copy failed';
+              }
+          });
+      }
+  });
+</script>
+{% endblock %}
